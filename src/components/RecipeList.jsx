@@ -1,12 +1,23 @@
 import React from 'react'
 import RecipeCard from './RecipeCard';
 
-const RecipeList = ({ recipes }) => {
+const RecipeList = ({ recipes, delRecipe, toggleFav, fav }) => {
     return (
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {recipes.map((recipe) => (
-          <RecipeCard key={recipe.id} recipe={recipe} />
-        ))}
+      <div>
+        <h2 className='text-xl font-bold mb-4'>Recipes</h2>
+        {recipes.length === 0 && <p>No recipes found!</p>}
+        <ul className='flex gap-4 flex-wrap'>
+          {recipes.map((recipe) => (
+            <li key={recipe.name}>
+              <RecipeCard
+                recipe={recipe}
+                onDel={delRecipe}
+                onToggleFav={toggleFav}
+                isFav={fav.includes(recipe)}
+              />
+            </li>
+          ))}
+        </ul>
       </div>
     );
   };
